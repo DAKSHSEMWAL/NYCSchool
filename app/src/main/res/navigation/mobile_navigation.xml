@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_School">
+
+    <fragment
+        android:id="@+id/nav_School"
+        android:name="com.dakshsemwal.nycschool.presentation.ui.home.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_school" >
+        <action
+            android:id="@+id/action_nav_School_to_nav_satResult"
+            app:destination="@id/nav_satResult" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_satResult"
+        android:name="com.dakshsemwal.nycschool.presentation.ui.sat.SchoolSATResultFragment"
+        android:label="@string/menu_gallery"
+        tools:layout="@layout/fragment_sat_results" >
+        <argument
+            android:name="dbnID"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_nav_satResult_to_nav_School"
+            app:destination="@id/nav_School" />
+    </fragment>
+
+</navigation>
