@@ -58,26 +58,27 @@ public class HomeFragment extends Fragment {
             assert schoolState != null;
             if (schoolState.isLoading()) {
                 //When Data is Loading
-                setViewVisibility(View.VISIBLE,View.GONE,View.GONE,View.GONE);
+                setViewVisibility(View.VISIBLE, View.GONE, View.GONE, View.GONE);
             } else {
                 if (!schoolState.getError().isEmpty()) {
                     //When any error occurs during network call
-                    setViewVisibility(View.GONE,View.GONE,View.GONE,View.VISIBLE);
+                    setViewVisibility(View.GONE, View.GONE, View.GONE, View.VISIBLE);
 
                 } else {
                     if (schoolState.getSortedSchoolListDTO() == null) {
                         //If Network call is successful but there is no data
-                        setViewVisibility(View.GONE,View.GONE,View.VISIBLE,View.GONE);
+                        setViewVisibility(View.GONE, View.GONE, View.VISIBLE, View.GONE);
                     } else {
                         //If Network call is successful and there no data
                         schoolListDTOItemArrayList.addAll(schoolState.getSortedSchoolListDTO());
                         schoolAdapter.submitList(schoolListDTOItemArrayList);
-                        setViewVisibility(View.GONE,View.VISIBLE,View.GONE,View.GONE);
+                        setViewVisibility(View.GONE, View.VISIBLE, View.GONE, View.GONE);
                     }
                 }
             }
         });
     }
+
     //Set Visibility of views representing different states of network calls
     private void setViewVisibility(int loader, int recyclerView, int noData, int error) {
         fragmentSchoolBinding.loading.setVisibility(loader);
