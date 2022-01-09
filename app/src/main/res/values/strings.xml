@@ -12,4 +12,8 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="no_sat_related_data_found">No SAT related data found</string>
     <string name="nyc_high_schools">NYC High Schools</string>
+    <string name="no_of_sat_taker">"No. of SAT Taker: "</string>
+    <string name="sat_critical_reading_avg_score">Sat critical reading avg score:</string>
+    <string name="sat_math_avg_score">SAT Math Avg Score:</string>
+    <string name="sat_writing_avg_score">SAT Writing Avg Score:</string>
 </resources>

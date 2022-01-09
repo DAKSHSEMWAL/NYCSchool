@@ -58,24 +58,20 @@ public class SchoolSATResultFragment extends Fragment {
         schoolSATViewModel.getState().observe(getViewLifecycleOwner(), statScore -> {
             assert statScore != null;
             if (statScore.isLoading()) {
-                binding.loading.setVisibility(View.VISIBLE);
-                binding.noData.setVisibility(View.GONE);
-                binding.error.setVisibility(View.GONE);
+                //When Data is Loading
+                setViewVisibility(View.VISIBLE,View.GONE,View.GONE,View.GONE);
             } else {
                 if (!statScore.getError().isEmpty()) {
-                    binding.loading.setVisibility(View.GONE);
-                    binding.noData.setVisibility(View.GONE);
-                    binding.error.setVisibility(View.VISIBLE);
-
+                    //When any error occurs during network call
+                    setViewVisibility(View.GONE,View.GONE,View.GONE,View.VISIBLE);
                 } else {
-                    binding.loading.setVisibility(View.GONE);
-                    binding.error.setVisibility(View.GONE);
                     SATResultDtoItem satResultDtoItem = statScore.getSchoolSat(dbn);
                     if (satResultDtoItem == null) {
-                        binding.noData.setVisibility(View.VISIBLE);
+                        //If Network call is successful but there is no data
+                        setViewVisibility(View.GONE,View.GONE,View.VISIBLE,View.GONE);
                     } else {
-                        binding.noData.setVisibility(View.GONE);
                         setData(satResultDtoItem);
+                        setViewVisibility(View.GONE,View.VISIBLE,View.GONE,View.GONE);
                     }
                 }
             }
@@ -84,8 +80,19 @@ public class SchoolSATResultFragment extends Fragment {
 
     private void setData(SATResultDtoItem satResultDtoItem) {
         binding.schoolName.setText(satResultDtoItem.getSchool_name());
+        binding.noOfSatTakenNumber.setText(satResultDtoItem.getNum_of_sat_test_takers());
+        binding.readingAvgScoreNumber.setText(satResultDtoItem.getSat_critical_reading_avg_score());
+        binding.satMathAvgScore.setText(satResultDtoItem.getSat_math_avg_score());
+        binding.satWritingAvgScoreNumber.setText(satResultDtoItem.getSat_math_avg_score());
     }
 
+    //Set Visibility of views representing different states of network calls
+    private void setViewVisibility(int loader, int dataView, int noData, int error) {
+        binding.loading.setVisibility(loader);
+        binding.layout.setVisibility(dataView);
+        binding.noData.setVisibility(noData);
+        binding.error.setVisibility(error);
+    }
 
     @Override
     public void onDestroyView() {
